@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import User from "../models/User";
 
+import bcrypt from "bcrypt";
+
 import express  from "express";
 const router = express.Router();
 
@@ -18,6 +20,11 @@ router.post('/singup', async (req, res) => {
     
         // create an object of user model
         const newUser = new User({name, email, password});
+
+        // hash password
+        const salt = await bcrypt.genSalt(13);
+        newUser.password = await bcrypt.hash(newUser.password, salt)
+        
     
         // save this object to user collection in database
         newUser.save();
