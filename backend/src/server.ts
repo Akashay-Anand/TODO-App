@@ -19,5 +19,5 @@ app.get('/', (req, res) => {
 
 // make server live
 app.listen(port,() => {
-    console.log("listening at 3000")
+    console.log("server is live... ")
 });
