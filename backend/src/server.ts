@@ -19,6 +19,8 @@ connectDB();
 // mount router
 import signupRoute from './routes/signup'
 app.use(signupRoute);
+import loginRoute from './routes/login'
+app.use(loginRoute);
 
 
 app.get('/', (req, res) => {
