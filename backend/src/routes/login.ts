@@ -2,6 +2,7 @@ import User from "../models/User";
 
 import bcrypt from "bcrypt"; // encrypt password
 import Joi from "joi"; // validate data
+import jwt from "jsonwebtoken";
 
 import express  from "express";
 const router = express.Router();
@@ -31,8 +32,17 @@ router.post('/login', async (req, res) => {
             req.body.password, user.password );
         
         if(!validpassword) return res.status(400).send("Invalid password");
-
-        res.status(200).send("Hello " + user.name );
+        
+        // create jwt token
+        const KEY = process.env.SECRET_KEY;
+        if(KEY){
+            const token = jwt.sign({_id: user._id, name:user.name, email: user.email}, KEY);
+            // send token to the client
+            res.status(200).send({message: `Hello ${user.name}`, token: token});
+        }else{
+            res.status(500).send({status: "failed", message: "Unable to create jwt token"});
+        }
+        // res.status(200).send("Hello " + user.name );
     }
     catch(err){
         if (err instanceof Error) {

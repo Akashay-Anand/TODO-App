@@ -3,6 +3,7 @@ import User from "../models/User";
 
 import bcrypt from "bcrypt"; // encrypt password
 import Joi from "joi"; // validate data
+import jwt from "jsonwebtoken"; 
 
 import express  from "express";
 const router = express.Router();
@@ -42,7 +43,17 @@ router.post('/singup', async (req, res) => {
     
       // save this object to user collection in database
       newUser.save();
-      res.status(200).send("success : user created");
+
+      // create jwt token
+      const KEY = process.env.SECRET_KEY;
+      if(KEY){
+          const token = jwt.sign({_id: newUser._id, name:newUser.name, email: newUser.email}, KEY);
+          // send token to the client
+          res.status(200).send({message: `Hello ${newUser.name}`, token: token});
+      }else{
+          res.status(500).send({status: "failed", message: "Unable to create jwt token"});
+      }
+      // res.status(200).send("success : user created");
 
     }catch (err) {
       if (err instanceof Error) {
