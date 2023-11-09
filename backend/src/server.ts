@@ -1,3 +1,4 @@
+// import modules 
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
@@ -6,7 +7,7 @@ const app = express();
 // retrive port number
 const port = process.env.PORT || 8080;
 
-// body parser
+// body parser : so so that requests body data can be extrected in correct format
 app.use(express.json());
 
 
@@ -15,9 +16,10 @@ import connectDB from './config/conect_mongo';
 connectDB();
 
 
-// routes
+// mount router
 import signupRoute from './routes/signup'
 app.use(signupRoute);
+
 
 app.get('/', (req, res) => {
     res.send('Hello World Anand');
