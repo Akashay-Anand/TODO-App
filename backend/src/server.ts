@@ -21,6 +21,9 @@ import signupRoute from './routes/signup'
 app.use(signupRoute);
 import loginRoute from './routes/login'
 app.use(loginRoute);
+import todoRoute from './routes/todoroute'
+app.use(todoRoute);
+
 
 
 app.get('/', (req, res) => {
