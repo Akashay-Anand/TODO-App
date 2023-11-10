@@ -24,16 +24,14 @@ const todoSchema = new mongoose.Schema({
     },
     dateCreated: {
         type: Date, 
-        default: new Date()
+        default: Date.now 
     },
     dateModified: {
         type: Date, 
-        default: new Date()
     },
     dueDate:{
         type: Date
     },
-    
     priority: {
         type: Boolean, 
         default: false
