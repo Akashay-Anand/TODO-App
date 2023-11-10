@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
         // create jwt token
         const KEY = process.env.SECRET_KEY;
         if(KEY){
-            const token = jwt.sign({_id: user._id, name:user.name, email: user.email}, KEY);
+            const token = jwt.sign({uid: user._id, name:user.name, email: user.email}, KEY);
             // send token to the client
             res.status(200).send({message: `Hello ${user.name}`, token: token});
         }else{

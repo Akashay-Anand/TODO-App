@@ -8,18 +8,21 @@ import jwt from "jsonwebtoken";
 import express  from "express";
 const router = express.Router();
 
+// middleware
+import auth from "../middlewares/user-auth";
+
 // todo routes
 
 // Perform CRUD operations on TODO
 // get todo
-router.route('/todo/list').get(async (req, res) => {
-    // const todos = await Todo.find().sort({date: -1});
-    // res.send(todos);
-    res.status(200).send("Hello todo App");
+router.route('/todo/list').get(auth, async (req, res) => {
+    const todos = await Todo.find().sort({date: -1});
+    res.send(todos);
+    
 });
 
 // add todo
-router.route('/todo/list').post(async (req, res) => {
+router.route('/todo/list').post(auth, async (req, res) => {
     let todo = new Todo(req.body);
     
     try{
@@ -32,7 +35,7 @@ router.route('/todo/list').post(async (req, res) => {
 });
 
 // update todo : create a new version of data; 
-router.route('/todo/list/:id').put(async (req, res) => {
+router.route('/todo/list/:id').put(auth, async (req, res) => {
 
     const todo = await Todo.findById(req.params.id);
     if(!todo) return res.status(404).send("Todo not found...");
@@ -42,7 +45,7 @@ router.route('/todo/list/:id').put(async (req, res) => {
 });
 
 // togal between completed or not completed
-router.route('/todo/list/:id').patch(async (req, res) => {
+router.route('/todo/list/:id').patch(auth, async (req, res) => {
     const todo = await Todo.findById(req.params.id);
     if(!todo) return res.status(404).send("Todo not found...");
 
@@ -66,7 +69,7 @@ router.route('/todo/list/:id').patch(async (req, res) => {
 
 });
 
-router.route('/todo/list/:id').delete(async (req, res) => {
+router.route('/todo/list/:id').delete(auth, async (req, res) => {
     const todo = await Todo.findById(req.params.id);
     if(!todo) return res.status(404).send("Todo not found...");
 
