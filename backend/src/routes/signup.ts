@@ -47,7 +47,7 @@ router.post('/singup', async (req, res) => {
       // create jwt token
       const KEY = process.env.SECRET_KEY;
       if(KEY){
-          const token = jwt.sign({_id: newUser._id, name:newUser.name, email: newUser.email}, KEY);
+          const token = jwt.sign({uid: newUser._id, name:newUser.name, email: newUser.email}, KEY);
           // send token to the client
           res.status(200).send({message: `Hello ${newUser.name}`, token: token});
       }else{
