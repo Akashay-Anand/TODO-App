@@ -29,6 +29,7 @@ ul.nav-ul {
 .nav-link {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 }
 
 .nav-link:hover {

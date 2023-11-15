@@ -18,7 +18,8 @@ router.post('/login', async (req, res) => {
     const {error} = validateUser.validate(req.body);
     if(error){
       console.log(error.details[0].message);
-      return res.status(400).send(error.details[0].message);
+      // return res.status(400).send(error.details[0].message);
+      return res.status(400).send({'message': "Hello Anand"});
     }
 
     try{
@@ -38,7 +39,7 @@ router.post('/login', async (req, res) => {
         if(KEY){
             const token = jwt.sign({uid: user._id, name:user.name, email: user.email}, KEY);
             // send token to the client
-            res.status(200).send({message: `Hello ${user.name}`, token: token});
+            res.status(200).send({message: `Hello ${user.name}`, token: token, uid: user._id});
         }else{
             res.status(500).send({status: "failed", message: "Unable to create jwt token"});
         }

@@ -1,11 +1,11 @@
 // import React from 'react';
 
-function Home() {
+function AddTodo() {
   return (
     <div>
-      <h1>Home Component</h1>
+      <h1>Add Todo</h1>
     </div>
   );
 }
 
-export default Home;
+export default AddTodo;

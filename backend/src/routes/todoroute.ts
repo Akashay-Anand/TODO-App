@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 import Todo from "../models/Todo";
-
 import bcrypt from "bcrypt"; // encrypt password
 import Joi from "joi"; // validate data
 import jwt from "jsonwebtoken"; 
-
 import express  from "express";
 const router = express.Router();
+
+// import getTodoList from "./controller";
 
 // middleware
 import auth from "../middlewares/user-auth";
@@ -17,9 +17,10 @@ import auth from "../middlewares/user-auth";
 // get todo
 router.route('/todo/list').get(auth, async (req, res) => {
     const todos = await Todo.find().sort({date: -1});
+    console.log(req)
     res.send(todos);
-    
 });
+// router.get('/todo/list', getTodoList);
 
 // add todo
 router.route('/todo/list').post(auth, async (req, res) => {
@@ -46,7 +47,7 @@ router.route('/todo/list/:id').put(auth, async (req, res) => {
 
 // togal between completed or not completed
 router.route('/todo/list/:id').patch(auth, async (req, res) => {
-    const todo = await Todo.findById(req.params.id);
+    const todo = await Todo.findById(req.body.data);
     if(!todo) return res.status(404).send("Todo not found...");
 
     try{
@@ -69,8 +70,8 @@ router.route('/todo/list/:id').patch(auth, async (req, res) => {
 
 });
 
-router.route('/todo/list/:id').delete(auth, async (req, res) => {
-    const todo = await Todo.findById(req.params.id);
+router.route('/todo/list/?:id').delete(auth, async (req, res) => {
+    const todo = await Todo.findById(req.body._id);
     if(!todo) return res.status(404).send("Todo not found...");
 
     // const todo = Todo.deleteOne({});
