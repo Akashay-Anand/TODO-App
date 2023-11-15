@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 const app = express();
+import cors from 'cors';
 
 // retrive port number
 const port = process.env.PORT || 8080;
@@ -10,6 +11,8 @@ const port = process.env.PORT || 8080;
 // body parser : so so that requests body data can be extrected in correct format
 app.use(express.json());
 
+// api access from different domains
+app.use(cors());
 
 // connect Database
 import connectDB from './config/conect_mongo';

@@ -49,7 +49,7 @@ router.post('/singup', async (req, res) => {
       if(KEY){
           const token = jwt.sign({uid: newUser._id, name:newUser.name, email: newUser.email}, KEY);
           // send token to the client
-          res.status(200).send({message: `Hello ${newUser.name}`, token: token});
+          res.status(200).send({message: `Hello ${newUser.name}`, token: token, uid: newUser._id});
       }else{
           res.status(500).send({status: "failed", message: "Unable to create jwt token"});
       }
