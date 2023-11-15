@@ -1,0 +1,18 @@
+.cardContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 30PX;
+    padding: 10PX;
+    /* height: 15rem; */
+    /* width: 20rem; */
+    border: 1px solid;
+    border-radius: 10px;
+    /* box-shadow: 10px 7px var(--BLACK); */
+    background-color: white;
+    overflow: hidden;
+}
+
+.cardContainer button{
+    margin: 3px;
+}

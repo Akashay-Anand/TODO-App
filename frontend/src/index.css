@@ -1,4 +1,26 @@
+* {
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+body {
+  background-color: var(--BGCOLOR);
+  margin: 0;
+}
+
 :root {
+  --LIGHTGRAY: #F2F2F2;
+  --BLACK: black;
+  --BGCOLOR: #d0e7e2;
+  --PRIMARYCOLOR: #F21D2F;
+  --WHITE: white;
+}
+
+span#light_text {
+  font-weight: 300;
+}
+
+
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -66,4 +88,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
